@@ -1,4 +1,7 @@
+require('dotenv').config();
 const express = require('express');
+const session = require('express-session');
+const passport = require('./middleware/passport');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const mongodb = require('./data/database');
@@ -8,6 +11,18 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
+// Sesión + Passport
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 },
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Rutas
+app.use('/auth', require('./routes/auth'));
 app.use('/', require('./routes'));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
