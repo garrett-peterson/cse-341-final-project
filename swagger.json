@@ -10,6 +10,14 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+    "sessionAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Cookie",
+      "description": "Passport session cookie created by the GitHub OAuth flow (start at GET /auth/github). Protected routes return 401 without it."
+    }
+  },
   "paths": {
     "/": {
       "get": {
@@ -92,10 +100,18 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       }
     },
     "/clothings/{id}": {
@@ -192,13 +208,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -223,13 +247,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       }
     },
     "/food/": {
@@ -291,10 +323,18 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       }
     },
     "/food/{id}": {
@@ -379,13 +419,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -410,13 +458,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       }
     },
     "/furniture/": {
@@ -478,10 +534,18 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       }
     },
     "/furniture/{id}": {
@@ -546,13 +610,25 @@
                 "category": {
                   "example": "any"
                 },
+                "size": {
+                  "example": "any"
+                },
+                "color": {
+                  "example": "any"
+                },
                 "price": {
+                  "example": "any"
+                },
+                "inStock": {
                   "example": "any"
                 },
                 "material": {
                   "example": "any"
                 },
-                "dimensions": {
+                "brand": {
+                  "example": "any"
+                },
+                "careInstructions": {
                   "example": "any"
                 }
               }
@@ -566,13 +642,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -597,13 +681,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       }
     },
     "/users/": {
@@ -639,19 +731,16 @@
             "schema": {
               "type": "object",
               "properties": {
-                "inMarketId": {
+                "employeeId": {
                   "example": "any"
                 },
-                "username": {
+                "fname": {
                   "example": "any"
                 },
-                "email": {
+                "lname": {
                   "example": "any"
                 },
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
+                "role": {
                   "example": "any"
                 }
               }
@@ -662,10 +751,18 @@
           "201": {
             "description": "Created"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       }
     },
     "/users/{id}": {
@@ -721,19 +818,16 @@
             "schema": {
               "type": "object",
               "properties": {
-                "inMarketId": {
+                "employeeId": {
                   "example": "any"
                 },
-                "username": {
+                "fname": {
                   "example": "any"
                 },
-                "email": {
+                "lname": {
                   "example": "any"
                 },
-                "firstName": {
-                  "example": "any"
-                },
-                "lastName": {
+                "role": {
                   "example": "any"
                 }
               }
@@ -747,13 +841,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -778,13 +880,21 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "sessionAuth": []
+          }
+        ]
       }
     }
   }

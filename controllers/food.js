@@ -38,7 +38,7 @@ const getSingle = async (req, res) => {
     if (food.length > 0) {
       res.status(200).json(food[0]);
     } else {
-      res.status(404).json({ message: "clothing not found" });
+      res.status(404).json({ message: "food not found" });
     }
   } catch (error) {
     res.setHeader("Content-Type", "application/json");

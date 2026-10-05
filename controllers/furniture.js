@@ -38,7 +38,7 @@ const getSingle = async (req, res) => {
     if (furniture.length > 0) {
       res.status(200).json(furniture[0]);
     } else {
-      res.status(404).json({ message: "clothing not found" });
+      res.status(404).json({ message: "furniture not found" });
     }
   } catch (error) {
     res.setHeader("Content-Type", "application/json");
@@ -81,17 +81,15 @@ const updateFurniture = async (req, res) => {
       return res.status(400).json({ message: "The ID provided is not valid" });
     }
     const furnitureId = new ObjectId(req.params.id);
+    // Same shape as createFurniture above: replaceOne swaps the whole
+    // document, so the fields here have to match the furniture model.
     const furniture = {
       id: req.body.inMarketId,
       name: req.body.name,
       category: req.body.category,
-      size: req.body.size,
-      color: req.body.color,
       price: req.body.price,
-      inStock: req.body.inStock,
       material: req.body.material,
-      brand: req.body.brand,
-      careInstructions: req.body.careInstructions,
+      dimensions: req.body.dimensions,
     };
     const response = await mongodb
       .getDatabase()
