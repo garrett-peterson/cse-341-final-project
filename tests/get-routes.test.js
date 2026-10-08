@@ -37,6 +37,24 @@ describe("GET /", () => {
   });
 });
 
+// Aliases so /login and /logout match the course example (Auth0). The real
+// implementation lives under /auth with Passport, and these just redirect.
+describe("GET /login and GET /logout aliases", () => {
+  test("GET /login redirects to /auth/github", async () => {
+    const res = await request(app).get("/login");
+
+    expect(res.status).toBe(302);
+    expect(res.headers.location).toBe("/auth/github");
+  });
+
+  test("GET /logout redirects to /auth/logout", async () => {
+    const res = await request(app).get("/logout");
+
+    expect(res.status).toBe(302);
+    expect(res.headers.location).toBe("/auth/logout");
+  });
+});
+
 // Shared suite for a collection endpoint. Each call below produces its own
 // describe block so failures point at the right collection.
 const describeCollection = ({ label, path, notFoundMessage }) => {

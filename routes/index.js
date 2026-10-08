@@ -1,6 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
+// Aliases so /login and /logout match the course example (Auth0 registers
+// those routes automatically). Here the real flow lives under /auth and runs
+// on Passport, so these top-level routes simply redirect to it.
+router.get("/login", (req, res) => res.redirect("/auth/github"));
+router.get("/logout", (req, res) => res.redirect("/auth/logout"));
+
 router.use("/clothings", require("./controllers-routes/clothings"));
 router.use("/food", require("./controllers-routes/food"));
 router.use("/furniture", require("./controllers-routes/furniture"));
