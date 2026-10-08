@@ -6,12 +6,12 @@ router.use("/food", require("./controllers-routes/food"));
 router.use("/furniture", require("./controllers-routes/furniture"));
 router.use("/users", require("./controllers-routes/users"));
 
-router.get('/', (req, res) => {
-    res.send(
-        req.session.user !== undefined
-            ? `Logged in as ${req.session.user.displayName}`
-            : "Logged Out"
-    );
+router.get("/", (req, res) => {
+    if (req.isAuthenticated()) {
+        res.send(`Logged in as ${req.user.displayName}`);
+    } else {
+        res.send("Logged Out");
+    }
 });
 
 

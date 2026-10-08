@@ -27,8 +27,6 @@ app.use('/', require('./routes'));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : "Logged Out")});
-
 mongodb.initDB((err) => {
     if (err) {
         console.error('Failed to connect to MongoDB:', err);
