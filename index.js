@@ -25,7 +25,13 @@ app.use(passport.session());
 app.use('/auth', require('./routes/auth'));
 app.use('/', require('./routes'));
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
+  swaggerOptions: {
+    // Send the session cookie with "Try it out" requests so the protected
+    // routes (POST/PUT/DELETE) work after logging in via GitHub OAuth.
+    withCredentials: true,
+  },
+}));
 
 mongodb.initDB((err) => {
     if (err) {
