@@ -17,6 +17,7 @@ jest.mock("../data/database", () => ({
 }));
 
 const app = require("./helpers/testApp");
+const { authState } = require("./helpers/testApp");
 
 // A 24-character hex string is a valid ObjectId; anything else should be
 // rejected by the route-level idMiddleware.
@@ -29,10 +30,24 @@ beforeEach(() => {
 });
 
 describe("GET /", () => {
-  test("returns 200 and the API is working message", async () => {
+  beforeEach(() => {
+    authState.isAuthenticated = false;
+    authState.user = null;
+  });
+
+  test("returns 200 and 'Logged Out' when there is no session", async () => {
     const res = await request(app).get("/");
     expect(res.status).toBe(200);
-    expect(res.text).toBe("API is working!");
+    expect(res.text).toBe("Logged Out");
+  });
+
+  test("returns 200 and 'Logged in as <name>' when authenticated", async () => {
+    authState.isAuthenticated = true;
+    authState.user = { displayName: "Test User" };
+
+    const res = await request(app).get("/");
+    expect(res.status).toBe(200);
+    expect(res.text).toBe("Logged in as Test User");
   });
 });
 

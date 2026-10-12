@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
   if (req.isAuthenticated && req.isAuthenticated()) {
     res.send(`Logged in as ${req.user.displayName}`);
   } else {
-    res.send("API is working!");
+    res.send("Logged Out");
   }
 });
 
