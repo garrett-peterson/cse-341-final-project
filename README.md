@@ -86,6 +86,11 @@ http://localhost:3000/api-docs
 
 This page contains the Swagger documentation for the API.
 
+### 7. Render Deployment
+
+To view the live application on Render, open:
+[cse-341-final-project-r0ix.onrender.com](https://cse-341-final-project-r0ix.onrender.com)
+
 ## Project Structure
 
 ```text

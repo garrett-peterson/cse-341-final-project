@@ -81,6 +81,8 @@ const updateFurniture = async (req, res) => {
       return res.status(400).json({ message: "The ID provided is not valid" });
     }
     const furnitureId = new ObjectId(req.params.id);
+    // Same shape as createFurniture above: replaceOne swaps the whole
+    // document, so the fields here have to match the furniture model.
     const furniture = {
       id: req.body.inMarketId,
       name: req.body.name,
